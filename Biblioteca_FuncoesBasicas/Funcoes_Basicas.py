@@ -67,3 +67,43 @@ def Zplane(xAxis, yAxis):
     plt.yticks(ticks)
 
     plt.show()
+
+def HIGHPASS_WINDOWED(FC, M):
+
+    Filter_kernel = []
+    for i in range(M):
+        if i - M / 2 == 0:
+            Filter_kernel.append(2 * np.pi * FC)
+        else:
+            Filter_kernel.append(np.sin(2 * np.pi * FC * (i - M / 2)) / (i - M / 2))
+        Filter_kernel[i] = (Filter_kernel[i] * (0.54 - 0.46 * np.cos(2 * np.pi * i / M)))
+
+    SUM = 0
+    for i in range(M):
+        SUM = SUM + Filter_kernel[i]
+
+    for i in range(M):
+        Filter_kernel[i] = (Filter_kernel[i] / SUM) * - 1
+
+    Filter_kernel[int(M / 2)] = Filter_kernel[int(M / 2)] + 1
+
+    return Filter_kernel
+
+def LOWPASS_WINDOWED(FC, M):
+
+    Filter_kernel = []
+    for i in range(M):
+        if i - M / 2 == 0:
+            Filter_kernel.append(2 * np.pi * FC)
+        elif (i - M / 2 > 0) or (i - M / 2 < 0):
+            Filter_kernel.append(np.sin(2 * np.pi * FC * (i - M / 2)) / (i - M / 2))
+        Filter_kernel[i] = Filter_kernel[i] * (0.54 - 0.46 * np.cos(2 * np.pi * i / M))
+
+    SUM = 0
+    for i in range(M):
+        SUM = SUM + Filter_kernel[i]
+
+    for i in range(M):
+        Filter_kernel[i] = Filter_kernel[i] / SUM
+
+    return Filter_kernel
