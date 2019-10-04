@@ -107,3 +107,34 @@ def LOWPASS_WINDOWED(FC, M):
         Filter_kernel[i] = Filter_kernel[i] / SUM
 
     return Filter_kernel
+
+def BANDPASS_WINDOWED(FC1, FC2, M):
+
+    Filter_Low = LOWPASS_WINDOWED(FC1, M)
+    Filter_High = HIGHPASS_WINDOWED(FC2, M)
+
+    Filter_band = []
+    for i in range(M):
+        Filter_band.append(Filter_High[i] + Filter_Low[i])
+
+    for i in range(M):
+        Filter_band[i] = Filter_band[i] * -1
+
+    Filter_band[int(M / 2)] = Filter_band[int(M / 2)] + 1
+
+    return Filter_band
+
+def MediaMovel(Tam_Media, data):
+
+    Data_Filtro = 0
+    data_Output = []
+    for i in range(len(data)):
+        for k in range(Tam_Media):
+            if (i - k) >= 0:
+                Data_Filtro += data[i - k]
+
+        Data_Filtro = Data_Filtro / Tam_Media
+        data_Output.append(Data_Filtro)
+        Data_Filtro = 0
+
+    return data_Output
