@@ -2,15 +2,17 @@ import Biblioteca_FuncoesBasicas.Funcoes_Basicas as fb
 import numpy as np
 import matplotlib.pyplot as plt
 
-Gb = 0.5
-Gm = 1
-Ga = 0.3
+np.set_printoptions(threshold=np.inf)
+
+Gb = 0
+Gm = 0
+Ga = 1
 
 FS = 48000
 BW = 1000
 M = int(4 / (BW / FS))
 
-Data = np.memmap("Music.pcm", dtype='h', mode='r')
+Data = np.memmap("Sweep_100_3k4.pcm", dtype='h', mode='r')
 
 Low_Pass = fb.LOWPASS_WINDOWED(2500 / FS, M)
 Band_Pass = fb.BANDPASS_WINDOWED(2500 / FS, 8500 /FS, M)
@@ -19,6 +21,11 @@ High_Pass = fb.HIGHPASS_WINDOWED(8500 / FS, M)
 Low_Pass = np.convolve(Data, Low_Pass)
 Band_Pass = np.convolve(Data, Band_Pass)
 High_Pass = np.convolve(Data, High_Pass)
+
+print(len(Low_Pass))
+
+#for i in range(len(Low_Pass)):
+ #   print(str(Low_Pass[i]) + ', ')
 
 Data_Output = (Low_Pass * Gb) + (Band_Pass * Gm) + (High_Pass * Ga)
 

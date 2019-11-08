@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 Tam_Media = int(input("Tamanho da média: "))
 
-data = np.memmap("Sweep_100_3k4.pcm", dtype='h', mode='r')
+data = np.memmap("Programas_Aula01\Trabalho04\Sweep_100_3k4.pcm", dtype='h', mode='r')
 Data_Filtro = 0
 data_Output = []
 
