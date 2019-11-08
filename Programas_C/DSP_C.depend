@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1572641509 source:c:\users\leonardo\documents\faculdade\8periodo\processador_digital_de_sinais\programas_c\filtro_mm.c
+	<stdio.h>
+
+1572640206 source:c:\users\leonardo\documents\faculdade\8periodo\processador_digital_de_sinais\programas_c\filtro_fir.c
+	<stdio.h>
+
+1573069788 source:c:\users\leonardo\documents\faculdade\8periodo\processador_digital_de_sinais\programas_c\equalizador.c
+	<stdio.h>
+	<stdlib.h>
+	<fcntl.h>
+	<io.h>
+
+1573081885 source:c:\users\leonardo\documents\faculdade\8periodo\processador_digital_de_sinais\programas_c\identificacao.c
+	<stdio.h>
+
